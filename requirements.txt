@@ -9,3 +9,4 @@ google-api-python-client
 st-copy-to-clipboard
 langchain
 langchain-community
+protobuf==3.20.3
