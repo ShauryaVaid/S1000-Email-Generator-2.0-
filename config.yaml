@@ -1,0 +1,52 @@
+# AI Email Generator Configuration
+
+# Provider Selection: ollama or gemini
+provider: ollama
+
+# Ollama Configuration
+ollama:
+  base_url: http://localhost:11434
+  model: llama3.1
+  embedding_model: nomic-embed-text
+  api_key: ollama
+  # Ollama Cloud Configuration
+  cloud_base_url: https://ollama.com
+  cloud_api_key: 96dc03fd305a421491186c268d334915.XE726r2RgxOc6UrFxhe7N3XG
+
+# Gemini Configuration
+gemini:
+  api_key: ""  # Set your Gemini API key here
+  model: gemini-1.5-flash
+  embedding_model: text-embedding-004
+
+# ChromaDB Configuration
+chromadb:
+  persist_directory: ./chroma_db
+  collection_name: email_context
+
+# Email Retrieval Configuration
+email:
+  # Use 'imap' or 'gmail_api'
+  method: imap
+  imap:
+    server: imap.gmail.com
+    port: 993
+    use_ssl: true
+  gmail_api:
+    credentials_file: credentials.json
+    token_file: token.json
+    scopes:
+      - https://www.googleapis.com/auth/gmail.readonly
+
+# Telegram Bot Configuration
+telegram:
+  bot_token: "8667694841:AAGPcm8iv91T4t6vpw7U70XMDTd3vXsjmeY"  # Set your Telegram bot token here
+  enabled: true
+  bot_username: "@BilEilbot"  # Update with your actual bot username from @BotFather
+
+# Generation Settings
+generation:
+  temperature: 0.5
+  retry_count: 3
+  delay: 0.05
+  max_workers: 50

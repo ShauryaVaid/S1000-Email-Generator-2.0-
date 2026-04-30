@@ -1,0 +1,21 @@
+# AI Email Generator Requirements
+
+# Core dependencies
+streamlit>=1.28.0
+pyyaml>=6.0
+requests>=2.31.0
+
+# AI/ML dependencies
+chromadb>=0.4.0
+
+# Telegram bot
+python-telegram-bot>=20.0
+
+# Gmail API (optional)
+google-auth>=2.23.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.1.0
+google-api-python-client>=2.100.0
+
+# Clipboard support
+st-copy-to-clipboard>=1.0.0
