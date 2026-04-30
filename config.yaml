@@ -11,7 +11,7 @@ ollama:
   api_key: ollama
   # Ollama Cloud Configuration
   cloud_base_url: https://ollama.com
-  cloud_api_key: 96dc03fd305a421491186c268d334915.XE726r2RgxOc6UrFxhe7N3XG
+  cloud_api_key: ""
 
 # Gemini Configuration
 gemini:
@@ -40,7 +40,7 @@ email:
 
 # Telegram Bot Configuration
 telegram:
-  bot_token: "8667694841:AAGPcm8iv91T4t6vpw7U70XMDTd3vXsjmeY"  # Set your Telegram bot token here
+  bot_token: ""  # Set your Telegram bot token here
   enabled: true
   bot_username: "@BilEilbot"  # Update with your actual bot username from @BotFather
 
