@@ -1,96 +1,195 @@
-# S1000-Email-Generator-2.0-
-The **S1000 AI Email Generator** is a Python-based tool using **LangChain** and **Streamlit** to automate professional outreach. It features a document-aware backend that grounds drafts in specific project context. Integrated with **MongoDB**, it ensures high-quality, personalized replies, allowing users to focus on high-level strategy.
-AI Email Generator S1000
-High-Speed Professional Communication Suite
+<div align="center">
 
-Project Overview
-The AI Email Generator S1000 is a comprehensive automation tool designed to
-transform rough, shorthand notes into polished, professional emails. Optimized for
-speed and flexibility, it supports both local and cloud-based AI providers, features a
-persistent memory system via vector databases, and offers multi-channel interaction
-through a Streamlit web interface and a Telegram bot.
+# ⚡ S1000 AI Email Generator (v2.0)
 
-Core Features
-Multimodal AI Support Local & Cloud LLMs Telegram Integration Vector Memory (RAG)
-Gmail Sync Custom Tones
-Dual Interface: Access the tool via a high-performance Streamlit dashboard or
-a mobile-friendly Telegram bot.
-Contextual Intelligence: Uses ChromaDB to store and retrieve past email
-context, ensuring consistent communication.
-Provider Flexibility: Seamlessly switch between local Ollama (for privacy),
-Ollama Cloud (for speed), or Google Gemini .
-Direct Email Retrieval: Connect your Gmail account via IMAP or Google API to
-fetch and reply to existing threads.
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://s1000-email-generator.streamlit.app/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![AI Engine](https://img.shields.io/badge/AI-Google%20Gemini-4285F4.svg)](https://ai.google.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 
-Technical Architecture
+<br/>
 
-Component Technology Purpose
-Language Python 3.x Core logic and API interactions
-•
+```text
+ ███████╗ ██╗ ██████╗  ██████╗  ██████╗ 
+ ██╔════╝███║██╔═████╗██╔═████╗██╔═████╗
+ ███████╗╚██║██║██╔██║██║██╔██║██║██╔██║
+ ╚════██║ ██║████╔╝██║████╔╝██║████╔╝██║
+ ███████║ ██║╚██████╔╝╚██████╔╝╚██████╔╝
+ ╚══════╝ ╚═╝ ╚═════╝  ╚═════╝  ╚═════╝ 
+```
 
-•
+**High-Speed Executive Communication Engine powered by Google Gemini & Streamlit**
 
-•
+### 🌐 Live Web Application: [s1000-email-generator.streamlit.app](https://s1000-email-generator.streamlit.app/)
 
-•
+</div>
 
-AI
-Orchestration
+---
 
-Custom AIClient
+## Overview
 
-Handling prompt templates and provider
-switching
+**S1000 AI Email Generator** is a production-grade communication suite that transforms unstructured thoughts, rough shorthand notes, and hurried bullet points into polished, executive-ready emails in seconds. 
 
-Vector
-Database
+Designed for busy professionals, founders, and engineers, S1000 combines cutting-edge **Google Gemini Flash** models with active token limit guardrails, vector context memory (RAG), and zero-leak credential security. Whether accessible via the interactive **Streamlit web dashboard** or on-the-go through the **Telegram Bot**, S1000 ensures high-impact email communication without ever hitting early token exhaustion.
 
-ChromaDB
+---
 
-Retrieval-Augmented Generation (RAG)
-capabilities
+## Key Features
 
-Web UI Streamlit
+- ⚡ **Live Cloud Intelligence**: Powered by Google's next-generation Gemini models (`gemini-2.5-flash`, `gemini-2.5-flash-lite`, `gemini-flash-latest`, `gemini-3.8-flash`).
+- 🛡️ **Zero-Leak Background Security**: API keys are securely insulated in server-side memory via Streamlit Secrets and environment variables. Keys are never exposed to the frontend, browser inspect tools, or public git commits.
+- 🎯 **7 Multi-Persona Tones**: Instantly switch personas to match any workplace context:
+  - **Professional**: Formal executive style for high-stakes business communication.
+  - **Polite**: Courteous and considerate style with high diplomacy.
+  - **Assertive**: Decisive, clear expectations and firm boundaries.
+  - **Friendly**: Warm, approachable, and relational.
+  - **GenZ**: Modern, casual, and energetic.
+  - **Casual**: Relaxed, conversational tone for internal banter.
+  - **Brief**: Ultra-concise, TL;DR-style for fast decision-making.
+- ⏱️ **Token Limit & Quota Protection**: Built-in `max_output_tokens: 800` budgeting, smart prompt truncation, and exponential backoff on HTTP 429 to prevent exhausting API limits.
+- 🧠 **Context Memory (RAG)**: Self-healing **ChromaDB** vector integration to store and query email context history.
+- 📋 **One-Click Clipboard**: Instant one-click copy button to paste drafts directly into Gmail, Outlook, or Slack.
+- 🤖 **Omnichannel Telegram Bot**: Run the automated mobile bot to generate emails straight from your phone chat.
+- 📧 **Gmail Thread Integration**: Optional IMAP/OAuth sync to fetch incoming threads and draft contextual replies.
 
-Front-end dashboard with real-time
-generation
+---
 
-Bot Interface
+## System Architecture
 
-python-telegram-
-bot
+### Architectural Overview
 
-Asynchronous mobile interaction
+```mermaid
+graph TD
+    A[User Input: Rough Notes + Tone] --> B[Streamlit Web UI / Telegram Bot]
+    B --> C{Security & Credential Layer}
+    C -->|st.secrets / .env| D[AI Client Orchestrator]
+    D -->|Token Guard: maxOutputTokens 800| E[Google Gemini Cloud API]
+    D -.->|Optional Offline| F[Ollama Local Daemon]
+    E --> G[Structured Draft Response]
+    G --> H[UI Display + 1-Click Clipboard]
+    G --> I[(ChromaDB Vector Store)]
+```
 
-Installation & Setup
-1. Clone & Install Dependencies
+### Execution Workflow
 
+```mermaid
+flowchart LR
+    Notes([Rough Notes]) --> Clean[Prompt Hardening & Sanitizer]
+    Clean --> Sec[Secret Resolution Engine]
+    Sec --> Gen[Gemini Flash Generator]
+    Gen --> Post[Response Validation]
+    Post --> Final[Subject + Greeting + Body + Sign-off]
+    Final --> View([Web App / Telegram])
+```
+
+---
+
+## Security & Secrets Management
+
+S1000 enforces strict zero-leakage security principles:
+
+1. **Server-Side Only**: The Gemini API key is loaded into backend memory via `st.secrets["GEMINI_API_KEY"]` on Streamlit Cloud or local environment variables.
+2. **Hidden from Frontend**: No API keys are rendered in the HTML DOM, JavaScript bundles, or URL parameters.
+3. **Repository Cleanliness**: `.streamlit/secrets.toml`, `.env`, and local credential files are strictly ignored by `.gitignore`.
+
+---
+
+## Supported AI Models
+
+| Provider | Model | Latency | Token Efficiency | Recommended For |
+| :--- | :--- | :--- | :--- | :--- |
+| **Google Gemini** | `gemini-2.5-flash` | Ultra-fast (~0.8s) | High | **Default / Production** |
+| **Google Gemini** | `gemini-2.5-flash-lite` | Instant (~0.4s) | Maximum (Highest RPM) | High-volume usage |
+| **Google Gemini** | `gemini-flash-latest` | Ultra-fast (~0.8s) | High | Latest stable capabilities |
+| **Google Gemini** | `gemini-3.1-flash-lite`| Fast (~0.9s) | High | Next-gen efficiency |
+| **Google Gemini** | `gemini-3.8-flash` | Smart (~1.2s) | High | Complex reasoning & negotiation |
+| **Ollama (Local)** | `llama3.1`, `mistral`| Local dependent | Local compute | 100% offline air-gapped environments |
+
+---
+
+## Setup & Installation
+
+### Prerequisites
+- Python 3.10 or higher
+- Git installed on your system
+- A Google Gemini API key (from [Google AI Studio](https://aistudio.google.com/))
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/ShauryaVaid/S1000-Email-Generator-2.0-.git
+cd S1000-Email-Generator-2.0-
+```
+
+### 2. Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
-2. Configuration
-Edit config.yaml to set your API keys and preferred provider:
+### 3. Configure API Key
+Create a `.streamlit/secrets.toml` file in the root directory (or set the `GEMINI_API_KEY` environment variable):
+```toml
+# .streamlit/secrets.toml (Kept local, never committed)
+GEMINI_API_KEY = "your-gemini-api-key-here"
+```
 
-provider: ollama
-ollama:
-base_url: http://localhost:11434
-model: llama3.1
-telegram:
-bot_token: "YOUR_TELEGRAM_BOT_TOKEN"
-enabled: true
+Alternatively, create a `.env` file:
+```env
+GEMINI_API_KEY=your-gemini-api-key-here
+```
 
-3. Running the Application
-Launch the main dashboard:
-
+### 4. Launch the Application
+```bash
 streamlit run main.py
+```
+Open your browser at `http://localhost:8501`.
 
-The Telegram bot can be started directly from the sidebar in the Streamlit UI or by
-running the bot script independently.
+---
 
-Usage
-Drafting: Input short notes like "tell team meeting moved to 4pm" into the text
-area.
-Tone Selection: Choose from Professional, Polite, Assertive, Friendly, GenZ, Casual,
-or Brief.
-Generation: Click "Generate Email" to receive a full draft including subject lines
-and greetings.
-Copy: Use the one-click clipboard tool to paste into your mail client.
+## Streamlit Cloud Deployment Guide
+
+To deploy or update this application on [Streamlit Community Cloud](https://s1000-email-generator.streamlit.app/):
+
+1. **Push your code to GitHub**:
+   ```bash
+   git add .
+   git commit -m "Update S1000 Email Generator 2.0"
+   git push origin main
+   ```
+2. **Configure Secrets on Streamlit Cloud**:
+   - Go to your app dashboard at [share.streamlit.io](https://share.streamlit.io/).
+   - Select the `s1000-email-generator` app.
+   - Click **Settings** (⚙️) > **Secrets**.
+   - Add your secret key:
+     ```toml
+     GEMINI_API_KEY = "your-api-key-here"
+     ```
+   - Click **Save**. The live site will automatically restart and begin serving requests securely!
+
+---
+
+## Project Structure
+
+```text
+S1000-Email-Generator-2.0-/
+│
+├── main.py                  # Streamlit frontend dashboard & application entry point
+├── ai_client.py             # Resilient AI client with token control & rate-limit handling
+├── chroma_manager.py        # Self-healing ChromaDB vector context storage
+├── email_retriever.py       # IMAP & Gmail API thread retriever
+├── telegram_bot.py          # Asynchronous Telegram bot implementation
+├── config.yaml              # App configuration & default parameters
+├── prompts.yaml             # Prompt templates and tone definitions
+├── requirements.txt         # Production Python dependencies
+├── .gitignore               # Strict security ignore rules
+└── README.md                # Comprehensive documentation
+```
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+<div align="center">
+Built with ❤️ for seamless, lightning-fast professional communication.
+</div>

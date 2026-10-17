@@ -1,16 +1,27 @@
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 
-# Environments
+# Environments & secrets
 .env
+*.env
+.env.*
 .venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Streamlit secrets
+.streamlit/secrets.toml
+.streamlit/
+
+# Temporary and runner scripts
+telegram_runner_temp.py
+*.tmp
 
 # Executables
 *.exe
@@ -21,3 +32,8 @@ venv.bak/
 
 # Local databases
 chroma_db/
+test_chroma/
+
+# Gmail OAuth credentials
+credentials.json
+token.json
